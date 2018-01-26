@@ -1,0 +1,30 @@
+# Selenium Grid dockerized
+
+- Selenium Grid is used to run our tests on different OS/browsers in parallel.
+It basically uses master-slaves (or hub-nodes) concept –
+where there is one master/hub
+and there are few slaves/nodes registered to the master/hub.
+When we send our tests to the master/hub for execution,
+based on the browser/OS requirements of the test,
+master will route the request to the appropriate nodes and get them executed.
+
+## services (containers that will be created)
+- selenium-hub Setup Selenium Hub
+- chrome/firevos Setup nodes with Chrome & Firefox and register to the hub
+
+
+## How to use
+Having docker and docker-compose
+
+```
+docker-compose up -d
+
+## to add more chrome or firefox selenium instances
+docker-compose scale chrome=5
+
+## and to shutdown the services
+docker-compose down
+
+```
+
+You can access the selenium-grid console using [http://localhost:4444/grid/console](http://localhost:4444/grid/console)
