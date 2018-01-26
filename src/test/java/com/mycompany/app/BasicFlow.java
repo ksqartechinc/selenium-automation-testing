@@ -8,7 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterTest;
-
+import org.openqa.selenium.UnexpectedAlertBehaviour;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
@@ -36,9 +39,22 @@ public class BasicFlow {
 
 		//System.setProperty("webdriver.chrome.driver","C:\\Users\\aseem\\Documents\\Chrome drivers\\Chrome 2.35\\chromedriver_win32 (1)\\chromedriver.exe");
 		//driver = new ChromeDriver();
-		DesiredCapabilities dc = DesiredCapabilities.chrome();
 		try {
-		    driver = new RemoteWebDriver(new URL("http://192.168.0.10:4444/wd/hub"), dc);
+
+				//DesiredCapabilities dc = DesiredCapabilities.chrome();
+				//dc.setCapability(ChromeOptions.CAPABILITY, options);
+				//dc.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
+				//dc.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+
+				ChromeOptions options = new ChromeOptions();
+				options.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
+				options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+				options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+				options.addArguments("disable-popup-blocking");
+
+				//options.merge(dc);
+
+		    driver = new RemoteWebDriver(new URL("http://192.168.0.10:4444/wd/hub"), options);
 				//driver.manage().window().maximize() ;
 				driver.get(URL);
 		    //more code goes here
