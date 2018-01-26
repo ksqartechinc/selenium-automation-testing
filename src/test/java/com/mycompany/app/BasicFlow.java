@@ -38,7 +38,7 @@ public class BasicFlow {
 		//driver = new ChromeDriver();
 		DesiredCapabilities dc = DesiredCapabilities.chrome();
 		try {
-		    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), dc);
+		    driver = new RemoteWebDriver(new URL("http://172.19.0.2:4444/wd/hub"), dc);
 				//driver.manage().window().maximize() ;
 				driver.get(URL);
 		    //more code goes here
