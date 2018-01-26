@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="basic-flow-module" parallel="none" allow-return-values="true" >
+  <test name="basic-flow">
+    <parameter name="URL" value="http://infoebs02.infolob.com:8000"/>
+    <parameter name="username" value="OPERATIONS"/>
+    <parameter name="password" value="welcome3210"/>
+    <classes>
+      <class name="com.mycompany.app.test.BasicFlow"/>
+    </classes>
+  </test>
+</suite> <!-- Suite -->

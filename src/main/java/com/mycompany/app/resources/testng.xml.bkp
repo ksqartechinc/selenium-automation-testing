@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SampleTestSuite">
+<test name="ImplmentingGap">
+<parameter name="URL" value="http://infoebs02.infolob.com:8000"/>
+<parameter name="username" value="OPERATIONS"/>
+<parameter name="password" value="welcome3210"/>
+
+<classes>
+<class name= "test.BasicFlow"/>
+</classes>
+</test>
+</suite>
