@@ -3,6 +3,7 @@
 pipeline {
     agent any
 
+
     stages {
         stage ('Clone') {
           steps {
@@ -11,12 +12,16 @@ pipeline {
         }
 
         stage('Build Jar') {
-          agent {
-              docker {
-                  image 'maven:3-alpine'
-                  args '-v /root/.m2:/root/.m2'
-                  reuseNode true
-              }
+          // agent {
+          //     docker {
+          //         image 'maven:3-alpine'
+          //         args '-v /root/.m2:/root/.m2'
+          //         reuseNode true
+          //     }
+          // }
+          tools {
+            maven 'Maven 3.3.9'
+            jdk 'jdk8'
           }
 
           steps {
