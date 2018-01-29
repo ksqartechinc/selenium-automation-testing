@@ -30,7 +30,7 @@ pipeline {
           }
         }
 
-
+        /*
         stage('Build Docker Image') {
           agent {
             dockerfile true
@@ -45,7 +45,7 @@ pipeline {
 
         }
 
-        /*
+        
         stage('Running Tests') {
             steps {
               // running the docker image with the tests
