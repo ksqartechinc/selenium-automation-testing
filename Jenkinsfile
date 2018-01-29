@@ -1,10 +1,10 @@
 #!/usr/bin/env groovys
 
 pipeline {
-    agent any
-
-    def testingImage
-
+    agent {
+      label 'seleinium-docker'
+    }
+    
     stages {
         stage ('Clone') {
           steps {
@@ -40,7 +40,7 @@ pipeline {
 
           steps {
             // building the docker image
-            testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+            def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
           }
 
         }
