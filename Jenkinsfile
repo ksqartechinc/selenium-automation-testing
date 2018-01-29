@@ -24,6 +24,7 @@ pipeline {
 
           steps {
                 sh 'mvn -B -DskipTests clean package'
+                sh 'docker images'
                 // CHK maybe targe will be loose after mvn clean package
                 // stash will be required
           }
@@ -38,7 +39,7 @@ pipeline {
 
           steps {
             // building the docker image
-             sh 'docker build -t "infolob/GapOracleEBsTest:${env.BUILD_ID}"'
+            // sh 'docker build -t "infolob/GapOracleEBsTest:${env.BUILD_ID}"'
             //docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
           }
 
