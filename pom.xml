@@ -96,7 +96,7 @@
         <configuration>
             <!-- vinsdocker is org name. -->
             <!-- containertest is the name of the image /  application  -->
-            <repository>infolob/infolob/GapOracleEBsTest</repository>
+            <repository>infolob/gap-oracle-selenium</repository>
             <!-- version of your image: could be sprint11 or release5 etc -->
             <tag>latest</tag>
         </configuration>
