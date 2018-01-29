@@ -3,6 +3,7 @@
 pipeline {
     agent any
 
+    def testingImage
 
     stages {
         stage ('Clone') {
@@ -30,7 +31,7 @@ pipeline {
           }
         }
 
-        /*
+
         stage('Build Docker Image') {
           agent {
             dockerfile true
@@ -39,11 +40,12 @@ pipeline {
 
           steps {
             // building the docker image
-            //def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+            testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
           }
 
         }
 
+        /*
         stage('Running Tests') {
             steps {
               // running the docker image with the tests
