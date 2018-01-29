@@ -5,7 +5,9 @@ pipeline {
 
     stages {
         stage ('Clone') {
+          steps {
             git url: 'https://github.com/ksqartechinc/selenium-automation-testing.git', branch: 'master'
+          }
         }
 
         stage('Build Jar') {
@@ -24,21 +26,20 @@ pipeline {
           }
         }
 
-
         stage('Build Docker Image') {
           agent {
             dockerfile true
-            reuseNode true
+            //reuseNode true
           }
           // building the docker image
-          def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+          //def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
         }
 
         stage('Running Tests') {
           // running the docker image with the tests
-          testingImage.inside {
-              sh '/usr/bin/java -cp /usr/share/tag/container-test.jar org.testng.TestNG /usr/share/tag/basic-flow-module.xml'
-          }
+          // testingImage.inside {
+          //     sh '/usr/bin/java -cp /usr/share/tag/container-test.jar org.testng.TestNG /usr/share/tag/basic-flow-module.xml'
+          // }
         }
 
 
