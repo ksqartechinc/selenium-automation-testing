@@ -40,7 +40,8 @@ pipeline {
 
           steps {
             // building the docker image
-            docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+             sh 'docker build'
+            //docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
           }
 
         }
