@@ -26,20 +26,28 @@ pipeline {
           }
         }
 
+        /*
         stage('Build Docker Image') {
           agent {
             dockerfile true
             //reuseNode true
           }
-          // building the docker image
-          //def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+
+          steps {
+            // building the docker image
+            //def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+          }
+
         }
 
         stage('Running Tests') {
-          // running the docker image with the tests
-          // testingImage.inside {
-          //     sh '/usr/bin/java -cp /usr/share/tag/container-test.jar org.testng.TestNG /usr/share/tag/basic-flow-module.xml'
-          // }
+            steps {
+              // running the docker image with the tests
+              // testingImage.inside {
+              //     sh '/usr/bin/java -cp /usr/share/tag/container-test.jar org.testng.TestNG /usr/share/tag/basic-flow-module.xml'
+              // }
+            }
+
         }
 
 
@@ -53,6 +61,7 @@ pipeline {
                 //testingImage.push('latest')
             }
         }
+        */
     }
 
 }
