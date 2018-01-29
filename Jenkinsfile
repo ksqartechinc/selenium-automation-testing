@@ -40,7 +40,7 @@ pipeline {
 
           steps {
             // building the docker image
-            def testingImage = docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+            docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
           }
 
         }
