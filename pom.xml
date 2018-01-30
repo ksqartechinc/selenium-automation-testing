@@ -105,8 +105,10 @@
     </plugins>
     <resources>
       <resource>
-          <filtering>false</filtering>
-          <directory>${basedir}/src/main/resources</directory>
+        <directory>src/main/resources</directory>
+              <includes>
+                  <include>*.*</include>
+              </includes>
       </resource>
     </resources>
   </build>
