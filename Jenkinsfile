@@ -28,44 +28,4 @@ pipeline {
                 // stash will be required
           }
         }
-
-        /*
-        stage('Build Docker Image') {
-          agent {
-            dockerfile true
-            //reuseNode true
-          }
-
-          steps {
-            // building the docker image
-            // sh 'docker build -t "infolob/GapOracleEBsTest:${env.BUILD_ID}"'
-            //docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
-          }
-
-        }
-
-        stage('Running Tests') {
-            steps {
-              // running the docker image with the tests
-              // testingImage.inside {
-              //     sh '/usr/bin/java -cp /usr/share/tag/container-test.jar org.testng.TestNG /usr/share/tag/basic-flow-module.xml'
-              // }
-            }
-
-        }
-
-
-        stage('Deploy') {
-            when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS'
-              }
-            }
-            steps {
-                //testingImage.push('latest')
-            }
-        }
-        */
-    }
-
 }
