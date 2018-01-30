@@ -6,7 +6,7 @@ services:
     ports:
       - "4444:4444"
   chrome:
-    image: selenium/node-chrome
+    image: selenium/node-chrome:3.5.3
     depends_on:
       - selenium-hub
     environment:

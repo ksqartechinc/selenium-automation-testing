@@ -2,7 +2,7 @@
 
 pipeline {
     agent any
-    
+
     stages {
         stage ('Clone') {
           steps {
@@ -10,7 +10,6 @@ pipeline {
           }
         }
 
-        stage('Build Jar') {
           // agent {
           //     docker {
           //         image 'maven:3-alpine'
@@ -45,7 +44,6 @@ pipeline {
 
         }
 
-        
         stage('Running Tests') {
             steps {
               // running the docker image with the tests
