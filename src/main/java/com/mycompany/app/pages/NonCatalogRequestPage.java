@@ -30,7 +30,7 @@ public class NonCatalogRequestPage {
 	private WebElement supplierItem;
 	private WebElement clearAll;
 	private WebElement addToCart;
-	private WebElement addToFavourites; 
+	private WebElement addToFavourites;
 	private WebElement shoppingCart;
 	private WebElement viewCartAndCheckout;
 
@@ -199,7 +199,7 @@ public class NonCatalogRequestPage {
 	public void shoppingCartSubmit()
 	{
 		//driver.switchTo().activeElement();
-		
+		getToShoppingcart();
 		WebDriverWait wait = new WebDriverWait(driver,15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Constants.SHOPPING_CART_SUBMIT)));
 		this.submitRequest = driver.findElement(By.cssSelector("img[title='Submit Requisition']"));
@@ -207,5 +207,3 @@ public class NonCatalogRequestPage {
 	}
 
 }
-
-
