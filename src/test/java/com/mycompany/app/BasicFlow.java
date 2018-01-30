@@ -54,7 +54,7 @@ public class BasicFlow {
 
 				//options.merge(dc);
 
-		    driver = new RemoteWebDriver(new URL("http://192.168.0.10:4444/wd/hub"), options);
+		    driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), options);
 				//driver.manage().window().maximize() ;
 				driver.get(URL);
 		    //more code goes here
