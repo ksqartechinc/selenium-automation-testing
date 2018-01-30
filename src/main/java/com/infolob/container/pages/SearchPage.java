@@ -1,4 +1,4 @@
-package com.testautomationguru.container.pages;
+package main.java.com.infolob.container.pages;
 
 import java.util.List;
 

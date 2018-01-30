@@ -1,4 +1,4 @@
-package com.mycompany.app.pages;
+package main.java.com.infolob.container.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mycompany.app.resources.Constants;
+import main.java.com.infolob.container.resources.Constants;
 
 public class NonCatalogRequestPage {
 
@@ -65,6 +65,8 @@ public class NonCatalogRequestPage {
 		return itemDescription;
 	}
 	public void setItemDescription(String itemDescription) {
+		WebDriverWait wait = new WebDriverWait(driver,15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Constants.NCR_ITEM_TYPE)));
 		this.itemDescription = driver.findElement(By.id(Constants.NCR_ITEM_DESCRIPTION));
 		this.itemDescription.sendKeys(itemDescription);
 	}
@@ -81,6 +83,9 @@ public class NonCatalogRequestPage {
 		return quantity;
 	}
 	public void setQuantity(String  quantity) {
+		
+		WebDriverWait wait = new WebDriverWait(driver,15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Constants.NCR_QUANTITY)));
 		this.quantity = driver.findElement(By.id(Constants.NCR_QUANTITY));
 		this.quantity.sendKeys(quantity);
 	}
@@ -97,6 +102,8 @@ public class NonCatalogRequestPage {
 		return unitPrice;
 	}
 	public void setUnitPrice(String unitPrice) {
+		WebDriverWait wait = new WebDriverWait(driver,15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Constants.NCR_UNIT_PRICE)));
 		this.unitPrice = driver.findElement(By.id(Constants.NCR_UNIT_PRICE));
 		this.unitPrice.sendKeys(unitPrice);
 	}
@@ -199,9 +206,9 @@ public class NonCatalogRequestPage {
 	public void shoppingCartSubmit()
 	{
 		//driver.switchTo().activeElement();
-		
+		getToShoppingcart();
 		WebDriverWait wait = new WebDriverWait(driver,15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Constants.SHOPPING_CART_SUBMIT)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("img[title='Submit Requisition']")));
 		this.submitRequest = driver.findElement(By.cssSelector("img[title='Submit Requisition']"));
 		this.submitRequest.click();
 	}
