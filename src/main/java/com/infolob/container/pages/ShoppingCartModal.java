@@ -1,4 +1,4 @@
-package com.mycompany.app.pages;
+package main.java.com.infolob.container.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mycompany.app.resources.Constants;
+import main.java.com.infolob.container.resources.Constants;
 
 public class ShoppingCartModal {
 	

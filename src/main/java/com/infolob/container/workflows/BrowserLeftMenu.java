@@ -1,13 +1,7 @@
-package com.mycompany.app.workflows;
+package main.java.com.infolob.container.workflows;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.mycompany.app.pages.LeftMenu;
-import com.mycompany.app.resources.Constants;
+import main.java.com.infolob.container.pages.LeftMenu;
+import main.java.com.infolob.container.resources.Constants;
 
 public class BrowserLeftMenu {
 	

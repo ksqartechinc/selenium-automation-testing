@@ -1,4 +1,4 @@
-package com.mycompany.app.objects;
+package main.java.com.infolob.container.objects;
 
 public class NonCatalogRequestObject {
 	
