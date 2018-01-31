@@ -2,7 +2,7 @@
 
 pipeline {
     agent any
-
+    
     stages {
         stage ('Clone') {
           steps {
@@ -10,6 +10,7 @@ pipeline {
           }
         }
 
+        stage('Build Jar-image') {
           // agent {
           //     docker {
           //         image 'maven:3-alpine'
@@ -28,4 +29,18 @@ pipeline {
                 // stash will be required
           }
         }
+
+        
+        stage('Running test') {
+          
+          steps {
+            // building the docker image
+            sh 'docker run infolob/gap-oracle-selenium:latest'
+            
+          }
+
+        }
+
+    }
+
 }
