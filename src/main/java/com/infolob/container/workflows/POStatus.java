@@ -37,6 +37,11 @@ public void  changePurchaseRequisitionStatus(String action)
 	
 }
 
+public void navigateToRequisitionDetailsPage()
+{
+	this.userWorkListPage = new UserWorkListPage(driver);
+	userWorkListPage.goToPurchaseRequisitionPage();
+}
 private void purchaseRequisitionAction(String action)
 {
 	this.purchaseOrderDetailPage = new PurchaseOrderDetailPage(driver);
