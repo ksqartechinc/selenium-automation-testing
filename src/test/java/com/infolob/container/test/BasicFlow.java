@@ -38,14 +38,24 @@ public class BasicFlow {
 	private POStatus poStatus;
 	@BeforeSuite
 	public void setUp(){
+		try {
 
-		System.setProperty("webdriver.chrome.driver","C:\\Users\\aseem\\Documents\\Chrome drivers\\Chrome 2.35\\chromedriver_win32 (1)\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get(URL);
+		     ChromeOptions options = new ChromeOptions();
+		     options.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
+		     options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+		     options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+		     options.addArguments("disable-popup-blocking");
+
+
+		       driver = new RemoteWebDriver(new URL("http://192.168.1.129:4444/wd/hub"), options);
+		     driver.get(URL);
+		       //more code goes here
+		   } catch(MalformedURLException ex){
+		   //do exception handling here
+		   }
 		
 	}
-	@Test
+	/*@Test
 	@Parameters({"username","password"})
 	public void Test001(String username,String password) throws InterruptedException {
 		lp = new LoginPage(driver);
@@ -80,7 +90,7 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 	//Following test is an approval path
 
 	@Parameters({"username","password","approver","appPassword"})
@@ -119,7 +129,10 @@ public class BasicFlow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//Login as Approver
+		
 		lp.login(approver, appPassword);
+		
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
@@ -144,6 +157,27 @@ public class BasicFlow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//Login as operations
+		lp.login(username, password);
+		
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		poStatus.navigateToRequisitionDetailsPage();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		homePage = new HomePage(driver);
+		homePage.logout();
+		
 	}
 
 	@AfterTest  					 
