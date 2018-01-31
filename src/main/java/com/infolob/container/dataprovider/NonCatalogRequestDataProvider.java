@@ -1,4 +1,4 @@
-package com.mycompany.app.dataprovider;
+package main.java.com.infolob.container.dataprovider;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -6,19 +6,19 @@ import java.io.InputStream;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.mycompany.app.objects.NonCatalogRequestObject;
+import main.java.com.infolob.container.objects.NonCatalogRequestObject;
 
 
 public class NonCatalogRequestDataProvider {
 
 //	private static final int COLUMNCOUNT = 1;
-	public static NonCatalogRequestObject getNCRObject()
+	public static NonCatalogRequestObject getNCRObject(int index)
 	{
-		return getData();
+		return getData(index);
 	}
 
 
-	private static NonCatalogRequestObject getData()
+	private static NonCatalogRequestObject getData(int index)
 	{
 		int i = 0; //j = 0;
 		NonCatalogRequestObject nonCatalogRequestObject = new NonCatalogRequestObject();
@@ -27,10 +27,10 @@ public class NonCatalogRequestDataProvider {
 
 			//InputStream fIS = new FileInputStream("./src/main/java/com/mycompany/app/dataprovider/TestData.xlsx");
 			InputStream fIS = NonCatalogRequestDataProvider.class.getResourceAsStream("/TestData.xlsx");
-			
+
 			XSSFWorkbook workbook1 = new XSSFWorkbook(fIS);
 
-			XSSFSheet sheet = workbook1.getSheetAt(0);
+			XSSFSheet sheet = workbook1.getSheetAt(index);
 
      				nonCatalogRequestObject.setItemType(Integer.parseInt(sheet.getRow(i).getCell(0).getRawValue()));
      				nonCatalogRequestObject.setItemDescription(sheet.getRow(i).getCell(1).getStringCellValue());
@@ -72,7 +72,7 @@ public class NonCatalogRequestDataProvider {
 
 	public static void main(String[] str)
 	{
-		NonCatalogRequestObject ncro = getData();
+		NonCatalogRequestObject ncro = getData(1);
 		ncro.print();
 	}
 }

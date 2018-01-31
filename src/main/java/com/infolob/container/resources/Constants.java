@@ -1,4 +1,4 @@
-package com.mycompany.app.resources;
+package main.java.com.infolob.container.resources;
 
 public class Constants {
 
@@ -42,6 +42,23 @@ public class Constants {
 	public static final String SHOPPING_CART_EDIT = "ShoppingPopupReview";
 	public static final String SHOPPING_CART_SAVE ="ShoppingPopupSave";
 	
+	//Requisition Decision page Strings 
+	 public static final String RP_APPROVE = "//*[@id=\"rowLayout\"]/td[2]/button";
+	 public static final String CSS_REJECT = "button[title='Reject']";
+	 public static final String CSS_APPROVE_AND_FORWARD = "button[title='Approve And Forward']";
+	 public static final String ID_FORWARD = "Forward";
+	 public static final String ID_REASSIGN = "NtfReassign";
+	 public static final String ID_REQUEST_INORMATION = "NtfMoreInfo";
+	
+	 
+	//String constants  for switch statements 
+	 public static final String SW_APPROVE = "Approve";
+	 public static final String SW_REJECT = "Reject";
+	 public static final String SW_APPROVE_AND_FORWARD = "Approve and forward";
+	 public static final String SW_FORWARD = "Forward";
+	 public static final String SW_REASSIGN = "Re-Assign";
+	 public static final String SW_REQUEST_INORMATION = "Request Information";
+	 
 	//Left menu strings
 	public static final String ADVANCED_PLANNING_ADMINISTRATOR = "Advanced Planning Administrator";
 	public static final String ALERT_MANAGER_VISION_ENTERPRISES = "Alert Manager, Vision Enterprises";
