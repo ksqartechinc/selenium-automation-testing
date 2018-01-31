@@ -5,8 +5,10 @@
     <parameter name="URL" value="http://infoebs02.infolob.com:8000"/>
     <parameter name="username" value="OPERATIONS"/>
     <parameter name="password" value="welcome3210"/>
+    <parameter name="approver" value="CBAKER"/>
+    <parameter name="appPassword" value="welcome3210"/>
     <classes>
-      <class name="com.mycompany.app.test.BasicFlow"/>
+      <class name="test.java.com.infolob.container.test.BasicFlow"/>
     </classes>
   </test>
 </suite> <!-- Suite -->

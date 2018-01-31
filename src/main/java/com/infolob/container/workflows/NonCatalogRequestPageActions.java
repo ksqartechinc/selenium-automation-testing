@@ -1,9 +1,9 @@
-package com.mycompany.app.workflows;
+package main.java.com.infolob.container.workflows;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mycompany.app.objects.NonCatalogRequestObject;
-import com.mycompany.app.pages.NonCatalogRequestPage;
+import main.java.com.infolob.container.objects.NonCatalogRequestObject;
+import main.java.com.infolob.container.pages.NonCatalogRequestPage;
 
 public class NonCatalogRequestPageActions {
 
