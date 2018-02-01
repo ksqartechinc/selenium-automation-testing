@@ -28,7 +28,7 @@ public class OrderConfirmationPage {
 	}
 	public int getRequisitionNumber()
 	{ 
-		this.requisitionNumber = Integer.parseInt(StringExtraction.getStringAtIndex(setApproverText(), 1));
+		this.requisitionNumber = Integer.parseInt(StringExtraction.getStringAtIndex(setApproverText()," ", 1));
 		return this.requisitionNumber;
 	}
 	
@@ -36,11 +36,11 @@ public class OrderConfirmationPage {
 	{
 		String firstName ;
 		String lastName ;
-		lastName = StringExtraction.getStringAtIndex(setApproverText(), 6);
+		lastName = StringExtraction.getStringAtIndex(setApproverText()," ", 6);
 		int length = lastName.length();
 		lastName = lastName.substring(0, length-1);
 		
-		firstName = StringExtraction.getStringAtIndex(setApproverText(), 7);
+		firstName = StringExtraction.getStringAtIndex(setApproverText()," " ,7);
 		return approverName;
 	}
 	

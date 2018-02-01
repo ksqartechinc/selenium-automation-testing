@@ -27,7 +27,7 @@ public class PurchaseOrderDetailPage {
 
 public void approveRequisition() {
 	 WebDriverWait wait = new WebDriverWait(driver,15);
-	 wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(Constants.RP_APPROVE)));
+	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.RP_APPROVE)));
 	 this.approve = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Constants.RP_APPROVE)));;
 	 this.approve.click();
 	 
