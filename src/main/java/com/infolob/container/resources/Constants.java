@@ -46,7 +46,7 @@ public class Constants {
 	 public static final String RP_APPROVE = "//*[@id=\"rowLayout\"]/td[2]/button";
 	 public static final String CSS_REJECT = "button[title='Reject']";
 	 public static final String CSS_APPROVE_AND_FORWARD = "button[title='Approve And Forward']";
-	 public static final String ID_FORWARD = "Forward";
+	 public static final String ID_FORWARD = "button[title='Forward']";
 	 public static final String ID_REASSIGN = "NtfReassign";
 	 public static final String ID_REQUEST_INORMATION = "NtfMoreInfo";
 	

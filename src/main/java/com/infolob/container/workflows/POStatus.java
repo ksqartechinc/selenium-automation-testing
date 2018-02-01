@@ -45,8 +45,9 @@ public void navigateToRequisitionDetailsPage(int requisitionNumber)
 private void purchaseRequisitionAction(String action)
 {
 	this.purchaseOrderDetailPage = new PurchaseOrderDetailPage(driver);
+	this.purchaseOrderDetailPage.changepurchaseRequisitionStatus(action);
 	
-	switch (action) {
+	/*switch (action) {
 	case Constants.SW_APPROVE:
 		purchaseOrderDetailPage.approveRequisition();
 		break;
@@ -68,6 +69,6 @@ private void purchaseRequisitionAction(String action)
 		
 	default:
 		break;
-	}
+	}*/
 }
 }

@@ -41,21 +41,10 @@ public class BasicFlow {
 	@BeforeSuite
 	public void setUp(){
 
-		try {
-
-		     ChromeOptions options = new ChromeOptions();
-		     options.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
-		     options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-		     options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-		     options.addArguments("disable-popup-blocking");
-
-
-		       driver = new RemoteWebDriver(new URL("http://192.168.1.129:4444/wd/hub"), options);
-		     driver.get(URL);
-		       //more code goes here
-		   } catch(MalformedURLException ex){
-		   //do exception handling here
-		   }
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\aseem\\Documents\\Chrome drivers\\Chrome 2.35\\chromedriver_win32 (1)\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get(URL);
 		
 	}
 	/*@Test
@@ -101,7 +90,7 @@ public class BasicFlow {
 	public void Test002(String username,String password, String approver, String appPassword) throws InterruptedException 
 	{
 		lp = new LoginPage(driver);
-		lp.login( username ,password);
+		/*lp.login( username ,password);
 		lm = new LeftMenu(driver);
 		blm = new  BrowserLeftMenu(lm);
 		blm.navigateToItem(Constants.IPROCUREMENT);
@@ -134,10 +123,10 @@ public class BasicFlow {
 		homePage = new HomePage(driver);
 		homePage.logout();
 		
-		
+		*/
 
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,9 +141,9 @@ public class BasicFlow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		poStatus =  new POStatus(driver);
-		poStatus.navigateToRequisitionDetailsPage(orderConfirmationNumber);
-		poStatus.changePurchaseRequisitionStatus(orderConfirmationNumber,Constants.SW_APPROVE);
+		poStatus.changePurchaseRequisitionStatus(16033,Constants.SW_REJECT);
 			
 		try {
 			Thread.sleep(10000);
@@ -173,7 +162,7 @@ public class BasicFlow {
 		}
 		
 		//Login as operations
-		lp.login(username, password);
+		/*lp.login(username, password);
 		
 		try {
 			Thread.sleep(15000);
@@ -182,7 +171,7 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 		
-		poStatus.navigateToRequisitionDetailsPage(orderConfirmationNumber);
+		poStatus.navigateToRequisitionDetailsPage(16028);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -190,7 +179,7 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 		homePage = new HomePage(driver);
-		homePage.logout();
+		homePage.logout();*/
 		
 	}
 

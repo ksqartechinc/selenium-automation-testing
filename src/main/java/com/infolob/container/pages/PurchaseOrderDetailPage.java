@@ -1,5 +1,7 @@
 package main.java.com.infolob.container.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +26,43 @@ public class PurchaseOrderDetailPage {
 	 this.driver = driver;
 }
 
+ public void changepurchaseRequisitionStatus(String status)
+ {
+	WebElement table = driver.findElement(By.id("NtfDetailsControls"));
+	WebElement btnTable =  table.findElement(By.id("pgBtnBarTbl"));
+	List<WebElement> btns = btnTable.findElements(By.cssSelector("button[class='x80']"));
+	System.out.println(btns.size());
+	for(WebElement btn:btns)
+	{
+	System.out.println(btn.getText());
+	}
+	
+	
+	
+	 switch (status) {
+		case Constants.SW_APPROVE:
+			btns.get(0).click();
+			break;
+		case Constants.SW_REJECT:
+			btns.get(3).click();
+			break;
+		case Constants.SW_REASSIGN:
+//			purchaseOrderDetailPage.reAssign();
+			break;
+		case Constants.SW_APPROVE_AND_FORWARD:
+			btns.get(1).click();
+			break;
+		case Constants.SW_FORWARD:
+//			purchaseOrderDetailPage.forwardRequisition();
+			break;
+		case Constants.SW_REQUEST_INORMATION:
+			btns.get(1).click();
+			break;
+			
+		default:
+			break;
+		}
+ }
 
 public void approveRequisition() {
 	 WebDriverWait wait = new WebDriverWait(driver,15);
