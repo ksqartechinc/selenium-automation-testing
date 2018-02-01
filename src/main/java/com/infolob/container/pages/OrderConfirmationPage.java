@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import main.java.com.infolob.container.common.utilities.StringExtraction;
+
 public class OrderConfirmationPage {
 	
  
@@ -26,27 +28,22 @@ public class OrderConfirmationPage {
 	}
 	public int getRequisitionNumber()
 	{ 
-		this.requisitionNumber = Integer.parseInt(getStringAtIndex(setApproverText(), 1));
-			return this.requisitionNumber;
+		this.requisitionNumber = Integer.parseInt(StringExtraction.getStringAtIndex(setApproverText()," ", 1));
+		return this.requisitionNumber;
 	}
 	
 	public String getApproverName()
 	{
 		String firstName ;
 		String lastName ;
-		lastName = getStringAtIndex(setApproverText(), 6);
+		lastName = StringExtraction.getStringAtIndex(setApproverText()," ", 6);
 		int length = lastName.length();
 		lastName = lastName.substring(0, length-1);
 		
-		firstName =  getStringAtIndex(setApproverText(), 7);
+		firstName = StringExtraction.getStringAtIndex(setApproverText()," " ,7);
 		return approverName;
 	}
 	
-	private String getStringAtIndex(String str, int index)
-	{
-
-		String[] stringArray = str.split(" ");
-		return stringArray[index];
-	}
+	
 	
 }

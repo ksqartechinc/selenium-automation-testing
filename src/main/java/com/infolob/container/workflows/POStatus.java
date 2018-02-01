@@ -27,26 +27,27 @@ public void loginAsUser(String username, String password)
 	this.loginPage = new LoginPage(driver);
 	this.loginPage.login(username, password);
 }
-public void  changePurchaseRequisitionStatus(String action)
+public void  changePurchaseRequisitionStatus(int requisitionNumber,String action)
 {
 	
 	this.userWorkListPage = new UserWorkListPage(driver);
-	userWorkListPage.goToPurchaseRequisitionPage();
+	userWorkListPage.goToPurchaseRequisitionPage(requisitionNumber);
 	
 	purchaseRequisitionAction(action);
 	
 }
 
-public void navigateToRequisitionDetailsPage()
+public void navigateToRequisitionDetailsPage(int requisitionNumber)
 {
 	this.userWorkListPage = new UserWorkListPage(driver);
-	userWorkListPage.goToPurchaseRequisitionPage();
+	userWorkListPage.goToPurchaseRequisitionPage(requisitionNumber );
 }
 private void purchaseRequisitionAction(String action)
 {
 	this.purchaseOrderDetailPage = new PurchaseOrderDetailPage(driver);
+	this.purchaseOrderDetailPage.changepurchaseRequisitionStatus(action);
 	
-	switch (action) {
+	/*switch (action) {
 	case Constants.SW_APPROVE:
 		purchaseOrderDetailPage.approveRequisition();
 		break;
@@ -68,6 +69,6 @@ private void purchaseRequisitionAction(String action)
 		
 	default:
 		break;
-	}
+	}*/
 }
 }
