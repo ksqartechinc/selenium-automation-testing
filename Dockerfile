@@ -12,4 +12,4 @@ ADD  target/libs $BASE_DIR/libs
 ADD basic-flow-module.xml $BASE_DIR/basic-flow-module.xml
 
 # Command line to execute the test
-ENTRYPOINT ["/usr/bin/java", "-cp", "/usr/share/tag/container-test.jar", "org.testng.TestNG", "/usr/share/tag/basic-flow-module.xml"]
+ENTRYPOINT ["/usr/bin/java", "-cp", "/usr/share/tag/container-test.jar", "org.testng.TestNG", "-d", "/usr/share/tag/test-output", "/usr/share/tag/basic-flow-module.xml"]

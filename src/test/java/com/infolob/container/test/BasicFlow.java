@@ -43,6 +43,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.Platform;
+
+
 public class BasicFlow {
 	// extent-report
 	public ExtentReports extent;
@@ -62,10 +64,14 @@ public class BasicFlow {
 	@BeforeSuite
 	public void setUp(){
 			try {
-				String workingDir = System.getProperty("user.dir");
 
-				extent = new ExtentReports(workingDir+"/Test_Execution_Report.html", true);
-				extent.loadConfig(new File(workingDir+"/extent-config.xml"));
+
+				//String workingDir = System.getProperty("user.dir");
+				//System.out.println("Current working directory : " + workingDir);
+
+				// We need to find a Way to specify where we want this report been created
+				extent = new ExtentReports("/Test_Execution_Report.html", true);
+				extent.loadConfig(BasicFlow.class.getResource("/extent-config.xml"));
 				extent.addSystemInfo("Environment","SIT");
 
 				/*
