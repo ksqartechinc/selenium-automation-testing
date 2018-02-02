@@ -41,6 +41,8 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.ExtentTestInterruptedException;
 import com.relevantcodes.extentreports.LogStatus;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.Platform;
 public class BasicFlow {
 	// extent-report
 	public ExtentReports extent;
@@ -61,23 +63,35 @@ public class BasicFlow {
 	public void setUp(){
 			try {
 				String workingDir = System.getProperty("user.dir");
-				System.out.println("Current working directory : " + workingDir);
 
 				extent = new ExtentReports(workingDir+"/Test_Execution_Report.html", true);
 				extent.loadConfig(new File(workingDir+"/extent-config.xml"));
-				extent.addSystemInfo("Environment","QA");
+				extent.addSystemInfo("Environment","SIT");
 
-					ChromeOptions options = new ChromeOptions();
-					options.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
-					options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-					options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-					options.addArguments("disable-popup-blocking");
+				/*
+				ChromeOptions options = new ChromeOptions();
+				options.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
+				options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+				options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+				options.addArguments("disable-popup-blocking");
+				*/
 
+					DesiredCapabilities dc = DesiredCapabilities.chrome();
 
-			    driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), options);
+			    //driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), options);
+
+				  driver = new RemoteWebDriver(new URL("http://192.168.0.10:4444/wd/hub"), dc);
+
 					driver.get(URL);
+
+					/*
+					System.setProperty("webdriver.chrome.driver","/Users/loko/Workspace/Infolob/selenium-automation-testing/chromedriver");
+  				driver = new ChromeDriver();
+  				driver.manage().window().maximize();
+  				driver.get(URL);
 			    //more code goes here
-			} catch(MalformedURLException ex){
+					*/
+			} catch(MalformedURLException ex){ //Exception e
 			//do exception handling here
 			}
 	}
@@ -87,16 +101,28 @@ public class BasicFlow {
 	public void Test001(String username,String password) throws InterruptedException {
 		lp = new LoginPage(driver);
 		lp.login(username, password);
-		//	  System.out.println("In test Test001");
+		test.log(LogStatus.INFO, "Loged into to webapp");
+
 		lm = new LeftMenu(driver);
 		blm = new  BrowserLeftMenu(lm);
+
+		test.log(LogStatus.INFO, "Navigating to IPROCUREMENT");
 		blm.navigateToItem(Constants.IPROCUREMENT);
 		psp = new ProcurementShopPage(driver);
 		psp.setNonCatalogRequest();
+
 		ncrpAction = new NonCatalogRequestPageActions(driver,NonCatalogRequestDataProvider.getNCRObject(0));
+
+		test.log(LogStatus.INFO, "input data");
 		ncrpAction.performAction("input data");
+
+		test.log(LogStatus.INFO, "addToCart");
 		ncrpAction.performAction("addToCart");
+
+		test.log(LogStatus.INFO, "view cart");
 		ncrpAction.performAction("view cart");
+
+		test.log(LogStatus.INFO, "submit");
 		ncrpAction.performAction("submit");
 
 
@@ -106,9 +132,10 @@ public class BasicFlow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//	  assertTrue(lm.isLeftMenuPresent(), "Could not find left menu");
+
 		homePage = new HomePage(driver);
 		homePage.logout();
+		test.log(LogStatus.INFO, "Logout");
 
 		try {
 			Thread.sleep(10000);
@@ -128,15 +155,28 @@ public class BasicFlow {
 	{
 		lp = new LoginPage(driver);
 		lp.login( username ,password);
+		test.log(LogStatus.INFO, "Loged into to webapp");
+
 		lm = new LeftMenu(driver);
 		blm = new  BrowserLeftMenu(lm);
+
+		test.log(LogStatus.INFO, "Navigating to IPROCUREMENT");
 		blm.navigateToItem(Constants.IPROCUREMENT);
+
 		psp = new ProcurementShopPage(driver);
 		psp.setNonCatalogRequest();
 		ncrpAction = new NonCatalogRequestPageActions(driver,NonCatalogRequestDataProvider.getNCRObject(1));
+
+		test.log(LogStatus.INFO, "input data");
 		ncrpAction.performAction("input data");
+
+		test.log(LogStatus.INFO, "addToCart");
 		ncrpAction.performAction("addToCart");
+
+		test.log(LogStatus.INFO, "view cart");
 		ncrpAction.performAction("view cart");
+
+		test.log(LogStatus.INFO, "submit");
 		ncrpAction.performAction("submit");
 
 		try {
@@ -146,8 +186,10 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 		//Obtain order confirmation Number
+		test.log(LogStatus.INFO, "Getting order confirmation Number");
 		orderConfirmation = new OrderConfirmationPage(driver);
 		int orderConfirmationNumber = orderConfirmation.getRequisitionNumber();
+
 
 		System.out.println(orderConfirmationNumber);
 		try {
@@ -156,7 +198,8 @@ public class BasicFlow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//	  assertTrue(lm.isLeftMenuPresent(), "Could not find left menu");
+
+		test.log(LogStatus.INFO, "Loging out");
 		homePage = new HomePage(driver);
 		homePage.logout();
 
@@ -167,7 +210,7 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 		//Login as Approver
-
+		test.log(LogStatus.INFO, "Login as Approver");
 		lp.login(approver, appPassword);
 
 		try {
@@ -177,6 +220,7 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 
+		test.log(LogStatus.INFO, "Changing Purchase requisition status");
 		poStatus =  new POStatus(driver);
 		poStatus.changePurchaseRequisitionStatus(16033,Constants.SW_REJECT);
 
@@ -187,6 +231,7 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 
+		test.log(LogStatus.INFO, "Loging out");
 		homePage = new HomePage(driver);
 		homePage.logout();
 		try {
@@ -197,16 +242,9 @@ public class BasicFlow {
 		}
 
 		//Login as operations
+		test.log(LogStatus.INFO, "Login as opertations");
 		lp.login(username, password);
 
-		try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		poStatus.navigateToRequisitionDetailsPage(16028);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -215,7 +253,8 @@ public class BasicFlow {
 		}
 		homePage = new HomePage(driver);
 		homePage.logout();
-
+		test.log(LogStatus.INFO, "Loging out");
+		test.log(LogStatus.PASS, "QABot");
 	}
 
 	@BeforeMethod
