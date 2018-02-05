@@ -25,7 +25,9 @@ public class NonCatalogRequestDataProvider {
 		try {
 			// src = new File("C:\\Users\\aseem\\eclipse-workspace\\GapTestAutomation\\src\\resources\\TestData.xlsx");
 
-			InputStream fIS = new FileInputStream("./src/main/java/com/infolob/container/dataprovider/TestData.xlsx");
+			//InputStream fIS = new FileInputStream("./src/main/java/com/mycompany/app/dataprovider/TestData.xlsx");
+			InputStream fIS = NonCatalogRequestDataProvider.class.getResourceAsStream("/TestData.xlsx");
+
 			XSSFWorkbook workbook1 = new XSSFWorkbook(fIS);
 
 			XSSFSheet sheet = workbook1.getSheetAt(index);

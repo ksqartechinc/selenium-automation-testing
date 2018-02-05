@@ -30,7 +30,7 @@ public class NonCatalogRequestPage {
 	private WebElement supplierItem;
 	private WebElement clearAll;
 	private WebElement addToCart;
-	private WebElement addToFavourites; 
+	private WebElement addToFavourites;
 	private WebElement shoppingCart;
 	private WebElement viewCartAndCheckout;
 
@@ -214,5 +214,3 @@ public class NonCatalogRequestPage {
 	}
 
 }
-
-

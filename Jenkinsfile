@@ -10,7 +10,7 @@ pipeline {
           }
         }
 
-        stage('Build Jar') {
+        stage('Build Jar-image') {
           // agent {
           //     docker {
           //         image 'maven:3-alpine'
@@ -30,44 +30,17 @@ pipeline {
           }
         }
 
-        /*
-        stage('Build Docker Image') {
-          agent {
-            dockerfile true
-            //reuseNode true
-          }
-
+        
+        stage('Running test') {
+          
           steps {
             // building the docker image
-            // sh 'docker build -t "infolob/GapOracleEBsTest:${env.BUILD_ID}"'
-            //docker.build("infolob/GapOracleEBsTest:${env.BUILD_ID}")
+            sh 'docker run infolob/gap-oracle-selenium:latest'
+            
           }
 
         }
 
-        
-        stage('Running Tests') {
-            steps {
-              // running the docker image with the tests
-              // testingImage.inside {
-              //     sh '/usr/bin/java -cp /usr/share/tag/container-test.jar org.testng.TestNG /usr/share/tag/basic-flow-module.xml'
-              // }
-            }
-
-        }
-
-
-        stage('Deploy') {
-            when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS'
-              }
-            }
-            steps {
-                //testingImage.push('latest')
-            }
-        }
-        */
     }
 
 }
