@@ -1,6 +1,6 @@
 # selenium-automation-testing
-This project takes Selenium automation tests code and using docker run tests
-in a container, using a selenium grid with chrome and firefox nodes.
+This project takes Selenium automation tests code and using run tests
+in a container with Docker, using a selenium grid with chrome and firefox nodes.
 The tests results reports (TestNG and extent) can be retrieved from the container.
 
 - Selenium automation tests should committed to the src directory
@@ -21,12 +21,12 @@ It will create the following containers
 in any of the nodes available (for this case chrome or firefox). Usually you can see
 the Selenium Hub web ui when is running at http://localhost:4444/grid/console and nodes can subcribe to the hub at http://localhost:4444/wd/hub
 
-- chrome/firefox nodes : The browser specific nodes where selinum tests can run.
+- chrome/firefox nodes : The browser specific nodes where selenium tests can run.
 
 - container-test : The container with the selenium tests compiled (using maven)
 and ready to run. The docker image used to run this container is pulled from https://hub.docker.com/r/infoloblabs/gap-oracle-selenium/. As you can see you can
 build your own image using the dockerfile in this solution or using the maven docker plugin
-included at the pom.xml
+included at the pom.xml (just ```mvn clean package ```)
 
 TestNG and extent result reports can be retrieved issuing some docker copy commands over the container-test
 
@@ -35,25 +35,30 @@ docker cp container-test:/usr/share/tag/test-output/ .
 docker cp container-test:/Test_Execution_Report.html .  
 ```
 
-## Raising your own Selenium CI/CD
+## Raising your own Jenkins based Selenium CI/CD
 If you want to build your own Selenium automation tests docker images in a CI/CD
-way you just need:
+way, you just need:
 
 ### Running the Selenium grid.
 
 ```
-docker-compose up -d
+# selenium-grid/docker-compose.yml is the compose file to raise just selenium hub and node containers
+
+docker-compose -f selenium-grid/docker-compose.yml up
+
+## after running this command the second time you will need to remove the existing containers from the firs time
+# docker rm $( docker ps -q -f status=exited)
 
 ## to add more chrome or firefox selenium instances
-#docker-compose scale chrome=5
+# docker-compose scale chrome=5
 ## and to shutdown the services
-#docker-compose down
+# docker-compose down
 ```
 You can access the selenium-grid console using [http://localhost:4444/grid/console](http://localhost:4444/grid/console)
 
-### Running Jenkins server to build you selenium test docker images from source code
+### Running Jenkins server to build your selenium test docker images from source code
 
-Jenkins server to have a job to pull the source code:
+Jenkins server to have a job to pull the source code and doing the follwing CI/CD steps:
 
   - building the maven test project
   - building the docker image of the selenium test. (using  the dockerifle
@@ -82,12 +87,12 @@ Jenkins server to have a job to pull the source code:
 - Configuring and creating the Pipeline for the Selenium CI/CD
 In order to have a Pipeline building Selenium automation tests and Docker images
  you would need to install the following Jenkins plugins
- - Pipeline multibranch
- - Pipeline
- - Maven
- - Github to retrieve your code hosted at githug
- - Docker Pipeline
- - Email Extension
+  - Pipeline multibranch
+  - Pipeline
+  - Maven
+  - Github to retrieve your code hosted at githug
+  - Docker Pipeline
+  - Email Extension
 
 - Creating the Selenium pipeline
   - At Jenkins cick on New Item
