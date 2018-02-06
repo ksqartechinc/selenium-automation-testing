@@ -7,7 +7,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-Test_Execution_Report.html
+
 .DS_Store
 test-output/
 
