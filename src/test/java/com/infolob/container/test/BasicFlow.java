@@ -82,14 +82,13 @@ public class BasicFlow {
 				options.addArguments("disable-popup-blocking");
 				*/
 
-					DesiredCapabilities dc = DesiredCapabilities.chrome();
-
-			    //driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), options);
-
-				  driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), dc);
-
+				DesiredCapabilities dc = DesiredCapabilities.chrome();
+				String host = System.getProperty("seleniumHubHost");
+				  //driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), options);
+				  //driver = new RemoteWebDriver(new URL("http://192.168.7.121:4444/wd/hub"), dc);
+				  System.out.println("The ip address to use : " + host);
+					driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), dc);
 					driver.get(URL);
-
 					/*
 					System.setProperty("webdriver.chrome.driver","/Users/loko/Workspace/Infolob/selenium-automation-testing/chromedriver");
   				driver = new ChromeDriver();
