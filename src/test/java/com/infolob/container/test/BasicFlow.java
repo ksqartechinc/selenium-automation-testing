@@ -4,9 +4,12 @@ package test.java.com.infolob.container.test;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -55,13 +58,32 @@ public class BasicFlow {
 	private PurchaseOrderDetailPage purchaseOrderDetailPage;
 	@BeforeSuite
 	public void setUp(){
-		
-				
-		System.setProperty("webdriver.chrome.driver","C:\\Users\\aseem\\Documents\\Chrome drivers\\Chrome 2.35\\chromedriver_win32 (1)\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+		// We need to find a Way to specify where we want this report been created
+		extent = new ExtentReports("/Test_Execution_Report.html", true);
+		extent.loadConfig(BasicFlow.class.getResource("/extent-config.xml"));
+		extent.addSystemInfo("Environment","SIT");
+
+		/*
+		ChromeOptions options = new ChromeOptions();
+		options.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
+		options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+		options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+		options.addArguments("disable-popup-blocking");
+		 */
+
+		DesiredCapabilities dc = DesiredCapabilities.chrome();
+		String host = System.getProperty("seleniumHubHost");
+
+		System.out.println("The ip address to use : " + host);
+		try {
+			driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), dc);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driver.get(URL);
-		
+
+
 
 	}
 	@Test
@@ -70,9 +92,9 @@ public class BasicFlow {
 		lp = new LoginPage(driver);
 		lp.login("aseema31", "password");
 		lm = new LeftMenu(driver);
-
-
 		assertTrue(lm.isLeftMenuPresent());
+
+
 	}
 
 	@Test(enabled = false)
@@ -267,10 +289,7 @@ public class BasicFlow {
 	}
 
 
-	@AfterMethod
-	public void AfterMethod(){
-		extent.endTest(test);
-	}
+
 
 	@AfterSuite
 	public void AfterSuite(){
@@ -280,7 +299,7 @@ public class BasicFlow {
 
 
 
-		
+
 	@AfterMethod 					 
 	void tearDown(ITestResult result)
 	{
@@ -289,6 +308,7 @@ public class BasicFlow {
 			CaptureScreenshotOnFailedTest captureScreenshotOnFailedTest  = new CaptureScreenshotOnFailedTest(driver  );
 			captureScreenshotOnFailedTest.captureScreenshotOnFailure(result);
 		}
+		extent.endTest(test);
 
 	}
 
