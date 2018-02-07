@@ -25,16 +25,26 @@ public class PurchaseOrderDetailPage {
 	 
 	 this.driver = driver;
 }
+ private static String OS = null;
+ public static String getOsName()
+ {
+    if(OS == null) { OS = System.getProperty("os.name"); }
+    return OS;
+ }
+ public static boolean isWindows()
+ {
+    return getOsName().startsWith("Windows");
+ }
 
  public void changepurchaseRequisitionStatus(String status)
  {
 	WebElement table = driver.findElement(By.id("NtfDetailsControls"));
 	WebElement btnTable =  table.findElement(By.id("pgBtnBarTbl"));
 	List<WebElement> btns = btnTable.findElements(By.cssSelector("button[class='x80']"));
-	System.out.println(btns.size());
+//	System.out.println(btns.size());
 	for(WebElement btn:btns)
 	{
-	System.out.println(btn.getText());
+//	System.out.println(btn.getText());
 	}
 	
 	

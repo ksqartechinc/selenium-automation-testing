@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class UserWorkListPage {
 
+
  private WebDriver driver;
  private WebElement workListRow;
 
@@ -30,15 +31,14 @@ public class UserWorkListPage {
   if(isWindows())
   {
    workListRow =  driver.findElement(By.xpath("//*[@id=\"NtfWorklist:Content\"]/tbody/tr[1]/td[3]"));
-   System.out.println(workListRow.getText());
    workListRow.click();
   }else
   {
    workListRow =  driver.findElement(By.xpath("//*[@id=\"N41:NtfSubject:0\"]"));
-   System.out.println(workListRow.getText());
    workListRow.click();
   }
 
  }
+
 
 }
