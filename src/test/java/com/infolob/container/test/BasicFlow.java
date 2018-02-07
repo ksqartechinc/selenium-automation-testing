@@ -87,10 +87,11 @@ public class BasicFlow {
 
 	}
 	@Test
-	public void incorrectLogin()
+	@Parameters({"username","wrongPassword"})
+	public void incorrectLogin(String username, String wrongPassword)
 	{
 		lp = new LoginPage(driver);
-		lp.login("aseema31", "password");
+		lp.login( username, wrongPassword);
 		lm = new LeftMenu(driver);
 		assertTrue(lm.isLeftMenuPresent());
 
@@ -152,7 +153,7 @@ public class BasicFlow {
 
 	@Parameters({"username","password","approver","appPassword"})
 	@Test(enabled = false)
-	public void Test002(String username,String password, String approver, String appPassword) throws InterruptedException 
+	public void Test002(String username,String password, String approver, String appPassword) throws InterruptedException
 	{
 		lp = new LoginPage(driver);
 		lp.login( username ,password);
@@ -300,7 +301,7 @@ public class BasicFlow {
 
 
 
-	@AfterMethod 					 
+	@AfterMethod
 	void tearDown(ITestResult result)
 	{
 		if(result.getStatus() == ITestResult.FAILURE)
