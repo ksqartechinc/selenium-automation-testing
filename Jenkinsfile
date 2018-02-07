@@ -2,7 +2,7 @@
 
 pipeline {
     agent any
-    
+
     stages {
         stage ('Clone') {
           steps {
@@ -10,7 +10,7 @@ pipeline {
           }
         }
 
-        stage('Build Jar-image') {
+        stage('Build') {
           // agent {
           //     docker {
           //         image 'maven:3-alpine'
@@ -30,17 +30,49 @@ pipeline {
           }
         }
 
-        
-        stage('Running test') {
-          
+
+        stage('Test') {
+
           steps {
             // building the docker image
-            sh 'docker run infolob/gap-oracle-selenium:latest'
-            
+            sh '''
+            set +e
+
+            rm -rf test-output/
+            rm Test_Execution_Report.html
+            docker run --env SELENIUM_HUB=192.168.7.121 --name container-test infoloblabs/gap-oracle-selenium:latest || error=true
+
+            docker cp container-test:/usr/share/tag/test-output/ .
+            docker cp container-test:/Test_Execution_Report.html .
+
+            docker rm -f container-test
+
+
+            if [ $error ]
+            then
+            	exit -1
+            fi
+            '''
+
           }
 
         }
 
+        // stage('Publishing') {
+        //   steps {
+        //
+        //
+        //   }
+        //
+        // }
+        //
+        // stage('Reporting Results') {
+        //   steps {
+        //
+        //
+        //   }
+        //
+        // }  
     }
 
 }
