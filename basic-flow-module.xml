@@ -7,6 +7,7 @@
     <parameter name="password" value="welcome3210"/>
     <parameter name="approver" value="CBAKER"/>
     <parameter name="appPassword" value="welcome3210"/>
+    <parameter name="wrongPassword" value="welcome"/>
     <classes>
       <class name="test.java.com.infolob.container.test.BasicFlow"/>
     </classes>
