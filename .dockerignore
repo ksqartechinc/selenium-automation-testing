@@ -1,6 +1,0 @@
-src/*
-target/*
-!target/jet/app
-pom.xml
-.git
-.gitignore
