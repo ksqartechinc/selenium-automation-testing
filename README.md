@@ -1,6 +1,6 @@
 # selenium-automation-testing
 This project takes Selenium automation tests code and run the tests
-inside a Docker container, using a selenium grid with chrome and firefox nodes.
+inside a Docker containera, using a selenium grid with chrome and firefox nodes.
 The tests results reports (TestNG and extent) can be retrieved from the container.
 
 - Selenium automation tests should committed to the src directory
