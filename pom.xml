@@ -103,7 +103,7 @@
             <!-- containertest is the name of the image /  application  -->
             <repository>infoloblabs/gap-oracle-selenium</repository>
             <!-- version of your image: could be sprint11 or release5 etc -->
-            <tag>latest</tag>
+            <tag>alpha</tag>
         </configuration>
       </plugin>
 

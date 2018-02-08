@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ('Clone') {
           steps {
-            git url: 'https://github.com/ksqartechinc/selenium-automation-testing.git', branch: 'master'
+            git url: 'https://github.com/ksqartechinc/selenium-automation-testing.git', branch: 'alpha'
           }
         }
 
@@ -42,7 +42,7 @@ pipeline {
             rm -rf screenshots/
             rm Test_Execution_Report.html
 
-            docker run --env SELENIUM_HUB=192.168.7.121 --name container-test infoloblabs/gap-oracle-selenium:latest || error=true
+            docker run --env SELENIUM_HUB=192.168.7.121 --name container-test infoloblabs/gap-oracle-selenium:alpha || error=true
 
             docker cp container-test:/usr/share/tag/test-output/ .
             docker cp container-test:/Test_Execution_Report.html .
@@ -65,7 +65,7 @@ pipeline {
           steps {
             script {
               docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                  sh 'docker push infoloblabs/gap-oracle-selenium:latest'
+                  sh 'docker push infoloblabs/gap-oracle-selenium:alpha'
               }
             }
 
