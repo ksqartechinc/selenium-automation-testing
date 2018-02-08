@@ -258,7 +258,6 @@ public class BasicFlow {
 
 		test.log(LogStatus.INFO, "Login as opertations");
 		lp.login(username, password);
-		lp.login(username, password);
 
 		try {
 			Thread.sleep(5000);
