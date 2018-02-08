@@ -1,5 +1,4 @@
 #!/usr/bin/env groovys
-
 pipeline {
     agent any
 
@@ -11,13 +10,6 @@ pipeline {
         }
 
         stage('Build') {
-          // agent {
-          //     docker {
-          //         image 'maven:3-alpine'
-          //         args '-v /root/.m2:/root/.m2'
-          //         reuseNode true
-          //     }
-          // }
           tools {
             maven 'Maven 3.5.2'
           }
@@ -25,40 +17,34 @@ pipeline {
           steps {
                 sh 'mvn -B -DskipTests clean package'
                 sh 'docker images'
-                // CHK maybe targe will be loose after mvn clean package
-                // stash will be required
+
           }
         }
 
-
         stage('Test') {
-
           steps {
-            // building the docker image
             sh '''
-            set +e
+              set +e
 
-            rm -rf test-output/
-            rm -rf screenshots/
-            rm Test_Execution_Report.html
+              rm -rf test-output/
+              rm -rf screenshots/
+              rm Test_Execution_Report.html
 
-            docker run --env SELENIUM_HUB=192.168.1.129 --name container-test infoloblabs/gap-oracle-selenium:alpha || error=true
+              docker run --env SELENIUM_HUB=192.168.1.129 --name container-test infoloblabs/gap-oracle-selenium:alpha || error=true
 
-            docker cp container-test:/usr/share/tag/test-output/ .
-            docker cp container-test:/Test_Execution_Report.html .
-            docker cp container-test:/screenshots/ .
+              docker cp container-test:/usr/share/tag/test-output/ .
+              docker cp container-test:/Test_Execution_Report.html .
+              docker cp container-test:/screenshots/ .
 
-            docker rm -f container-test
+              docker rm -f container-test
 
 
-            if [ $error ]
-            then
-            	exit -1
-            fi
+              if [ $error ]
+              then
+              	exit -1
+              fi
             '''
-
           }
-
         }
 
         stage('Publishing') {
@@ -73,13 +59,36 @@ pipeline {
 
         }
 
-        // stage('Reporting Results') {
-        //   steps {
-        //
-        //
-        //   }
-        //
-        // }
+    }
+    post {
+    success {
+      script {
+
+        def content =  readFile('test-output/emailable-report.html')
+
+        emailext (
+            mimeType: "text/html",
+            to:"infoloblabs@gmail.com; seema.ahluwalia@infolob.com; girish.mallampalli@infolob.com",
+            subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            attachmentsPattern: "screenshots/*.png, Test_Execution_Report.html",
+            body: content
+        )
+      }
+
     }
 
+    failure {
+      script {
+        def content =  readFile('test-output/emailable-report.html')
+
+        emailext (
+            to:"infoloblabs@gmail.com; seema.ahluwalia@infolob.com; girish.mallampalli@infolob.com",
+            subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            attachmentsPattern: "screenshots/*.png, Test_Execution_Report.html",
+            body: content
+          )
+
+      }
+    }
+  }
 }
