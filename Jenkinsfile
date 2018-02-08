@@ -39,11 +39,14 @@ pipeline {
             set +e
 
             rm -rf test-output/
+            rm -rf screenshots/
             rm Test_Execution_Report.html
+
             docker run --env SELENIUM_HUB=192.168.7.121 --name container-test infoloblabs/gap-oracle-selenium:latest || error=true
 
             docker cp container-test:/usr/share/tag/test-output/ .
             docker cp container-test:/Test_Execution_Report.html .
+            docker cp container-test:/screenshots/ .
 
             docker rm -f container-test
 
@@ -58,21 +61,25 @@ pipeline {
 
         }
 
-        // stage('Publishing') {
-        //   steps {
-        //
-        //
-        //   }
-        //
-        // }
-        //
+        stage('Publishing') {
+          steps {
+            script {
+              docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                  sh 'docker push infoloblabs/gap-oracle-selenium:latest'
+              }
+            }
+
+          }
+
+        }
+
         // stage('Reporting Results') {
         //   steps {
         //
         //
         //   }
         //
-        // }  
+        // }
     }
 
 }
