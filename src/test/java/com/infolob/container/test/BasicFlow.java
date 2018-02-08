@@ -152,7 +152,7 @@ public class BasicFlow {
 	//Following test is an approval path
 
 	@Parameters({"username","password","approver","appPassword"})
-	@Test()
+	@Test(enabled = false)
 	public void Test002(String username,String password, String approver, String appPassword) throws InterruptedException
 	{
 		lp = new LoginPage(driver);
