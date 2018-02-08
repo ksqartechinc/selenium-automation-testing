@@ -266,8 +266,6 @@ public class BasicFlow {
 			e.printStackTrace();
 		}
 
-		poStatus.navigateToRequisitionDetailsPage(16028);
-
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
