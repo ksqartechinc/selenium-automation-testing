@@ -42,7 +42,7 @@ pipeline {
             rm -rf screenshots/
             rm Test_Execution_Report.html
 
-            docker run --env SELENIUM_HUB=192.168.7.121 --name container-test infoloblabs/gap-oracle-selenium:alpha || error=true
+            docker run --env SELENIUM_HUB=192.168.1.129 --name container-test infoloblabs/gap-oracle-selenium:alpha || error=true
 
             docker cp container-test:/usr/share/tag/test-output/ .
             docker cp container-test:/Test_Execution_Report.html .
