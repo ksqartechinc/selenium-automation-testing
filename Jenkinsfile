@@ -30,7 +30,7 @@ pipeline {
               rm -rf screenshots/
               rm Test_Execution_Report.html
 
-              docker run --env SELENIUM_HUB=192.168.1.129 --name container-test infoloblabs/gap-oracle-selenium:latest || error=true
+              docker run --env SELENIUM_HUB=192.168.1.129 --name container-test infoloblabs/gap-oracle-selenium:fail || error=true
 
               docker cp container-test:/usr/share/tag/test-output/ .
               docker cp container-test:/Test_Execution_Report.html .
@@ -51,7 +51,7 @@ pipeline {
           steps {
             script {
               docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                  sh 'docker push infoloblabs/gap-oracle-selenium:latest'
+                  sh 'docker push infoloblabs/gap-oracle-selenium:fail'
               }
             }
 
