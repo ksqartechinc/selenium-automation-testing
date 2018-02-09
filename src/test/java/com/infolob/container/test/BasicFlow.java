@@ -86,7 +86,7 @@ public class BasicFlow {
 
 
 	}
-	@Test(enabled = false)
+	@Test
 	@Parameters({"username","wrongPassword"})
 	public void incorrectLogin(String username, String wrongPassword)
 	{
@@ -98,7 +98,7 @@ public class BasicFlow {
 
 	}
 
-	@Test
+	@Test(enabled = false)
 	@Parameters({"username","password"})
 	public void Test001(String username,String password) throws InterruptedException {
 		lp = new LoginPage(driver);
@@ -152,7 +152,7 @@ public class BasicFlow {
 	//Following test is an approval path
 
 	@Parameters({"username","password","approver","appPassword"})
-	@Test
+	@Test(enabled = false)
 	public void Test002(String username,String password, String approver, String appPassword) throws InterruptedException
 	{
 		lp = new LoginPage(driver);
