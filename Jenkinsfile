@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ('Clone') {
           steps {
-            git url: 'https://github.com/ksqartechinc/selenium-automation-testing.git', branch: 'master'
+            git url: 'https://github.com/ksqartechinc/selenium-automation-testing.git', branch: 'inten'
           }
         }
 
